@@ -18,7 +18,8 @@ import { Setting } from './settings';
 const Links = [
                 {title:"Home",url:"/"},
                 {title:"Games",url:"/games"},
-                {title:"Integrations",url:"/integrations"},
+                {title:"Skills",url:"/skills"},
+                {title:"Contacs",url:"/contacs"},
                 {title:"Github",url:"https://github.com/x-eight"},
               ];
 
