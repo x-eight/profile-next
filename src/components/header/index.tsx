@@ -17,6 +17,7 @@ import { Setting } from './settings';
 
 const Links = [
                 {title:"Home",url:"/"},
+                {title:"Chart",url:"/chart"},
                 {title:"Games",url:"/games"},
                 {title:"Skills",url:"/skills"},
                 {title:"Contacs",url:"/contacs"},

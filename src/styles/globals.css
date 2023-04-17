@@ -1,8 +1,28 @@
 .customWidth {
-    width: auto !important;
+  width: auto !important;
 }
 
 .customHeight {
-    padding-top: 3rem;
-    height: 25rem !important;
+  padding-top: 3rem;
+  height: 25rem !important;
+}
+
+/*===========dexscreener===========*/
+#dexscreener-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 125%;
+}
+@media (min-width: 1400px) {
+  #dexscreener-embed {
+    padding-bottom: 65%;
+  }
+}
+#dexscreener-embed iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: 0;
 }
