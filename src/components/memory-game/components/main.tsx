@@ -4,17 +4,18 @@ import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 type Props = {
-  setStart: any;
+  setStart: Dispatch<SetStateAction<number>>;
   level: number;
   setLevel: Dispatch<SetStateAction<number>>;
+  levelType:any
 };
 
 export const MainScreen: FC<Props> = ({
   setStart,
   level,
   setLevel,
+  levelType
 }) => {
-  const levelText = ["Easy", "Medium", "Hard"];
 
   // CAMBIAR DIFICULTAD
   const increaseDifficulty = () => {
@@ -47,7 +48,7 @@ export const MainScreen: FC<Props> = ({
         </Text>
         <Flex>
           <IconButton aria-label="Add to friends" icon={<MinusIcon />} onClick={decreaseDifficulty} />
-          <Flex w="5rem" justifyContent="center" alignItems="center">{levelText[level]}</Flex>
+          <Flex w="5rem" justifyContent="center" alignItems="center">{levelType[level].level}</Flex>
           <IconButton aria-label="Add to friends" icon={<AddIcon />} onClick={increaseDifficulty} />
         </Flex>
         <Button label={"Start"} action={() => setStart(1)} />

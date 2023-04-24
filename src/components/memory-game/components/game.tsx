@@ -1,101 +1,35 @@
+import { Box,Flex,Grid,GridItem } from '@chakra-ui/react';
 import React, { useEffect, useState,Dispatch, FC, SetStateAction } from 'react';
+
 import { Card } from './card';
 import { arrCardsRand } from './createArrCardsRand';
+import { ImageCard } from './image-card';
+import { getCards, logoType } from './logos';
 
 type Props = {
-    numCards: number;
+    level: number;
     setStateGame: Dispatch<SetStateAction<number>>;
+    levelType:any
 };
 
-export const GameScreen: FC<Props> = ({ numCards, setStateGame }) => {
-    // OBJETO CON NUMERO DE CARTAS, SEGUN NIVEL
-    // 0 => 8,
-    // 1 => 16,
-    // 2 => 24,
+export const GameScreen: FC<Props> = ({ level, setStateGame,levelType }) => {
+  let [cards, setTCards] = useState<logoType[]>([])
 
-  // VARIABLES DE ESTADO
-  const [cardsArr, setCardsArr] = useState(new Array<any>());
-  const [moves, setMoves] = useState(0)
-
-  // GENERAR TARJETAS ALEATORIAS INICIALES
   useEffect(() => {
-    setCardsArr( arrCardsRand(8*(numCards+1)) )
-  }, [numCards])
-
-  // FUNCION: ROTAR
-  const rotate = (id:any, pinUp:any) => {
-    if (pinUp === 0) {
-      setCardsArr(prevArr => {
-        prevArr[id].rotate = true;
-        prevArr[id].validating = 1;
-        return [...prevArr]
-      })
-      setTimeout(() => validate(), 500)
-    }
-  }
-
-  // FUNCION: VALIDAR
-  const validate = () => {
-    setMoves( moves + 1)
-    const validatingCards = cardsArr.filter(card => card.validating === 1)
-
-    if (validatingCards.length === 2) {
-
-      // elementos distintos, retornamos
-      if (validatingCards[0].bind !== validatingCards[1].bind) {
-        setCardsArr(prevArr => {
-          prevArr[validatingCards[0].id].rotate = false;
-          prevArr[validatingCards[0].id].validating = 0;
-          prevArr[validatingCards[1].id].rotate = false;
-          prevArr[validatingCards[1].id].validating = 0;
-          return [...prevArr]
-        })
-      }
-
-      // elementos iguales
-      else {
-        setCardsArr(prevArr => {
-          prevArr[validatingCards[0].id].pinUp = 1;
-          prevArr[validatingCards[0].id].validating = 0;
-          prevArr[validatingCards[1].id].pinUp = 1;
-          prevArr[validatingCards[1].id].validating = 0;
-          return [...prevArr]
-        })
-      }
-    }
-
-    // verificamos que no haya elementos pendientes
-    const pinUpCards = cardsArr.filter( card => card.pinUp === 0).length
-    if(pinUpCards === 0) {
-        setStateGame(2)
-    }
-
-  }
-
+    const ss = getCards(levelType[level].numCards/2)
+    setTCards(ss)
+    console.log("ss :",ss)
+  }, [level])
+  
   return (
-    <div className='gamescreen'>
-      <div className='gamescreen--score grid grid-2'>
-        <div className='gamescreen--moves'>
-          <p>Movements: {moves}</p>
-        </div>
-      </div>
-      <div className='gamescreen--cards grid grid-4'>
-        {
-          cardsArr
-            .sort((a, b) => a.id - b.id)
-            .map(card => {
-              return <Card
-                key={card.id}
-                id={card.id}
-                rotate={card.rotate}
-                symbol={card.symbol}
-                pinUp={card.pinUp}
-                bind={card.bind}
-                actionRotate={rotate}
-              />
-            })
-        }
-      </div>
-    </div>
+    <Flex justifyContent="center" flexWrap="wrap">
+      <Grid templateColumns={`repeat(${levelType[level].x}, 1fr)`}
+      templateRows={`repeat(${levelType[level].y}, 1fr)`}
+      gap={4}>
+        {cards.map(c=><ImageCard text={c.name} card={c}/>)}
+
+      </Grid>
+    </Flex>
   )
 }
+
