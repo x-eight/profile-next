@@ -17,8 +17,8 @@ const Game: NextPage = () => {
       <HStack
               spacing={7}
               display={{ base: 'row', md: 'flex' }}>
-              {games.map((g) => (
-        <Card cover={g.cover} avatar={g.avatar} title={g.title} description={g.description}/> 
+              {games.map((g,i) => (
+        <Card key={i} cover={g.cover} avatar={g.avatar} title={g.title} description={g.description}/> 
       ))}
       </HStack>
       </Center>

@@ -15,7 +15,7 @@ import { CustomCard } from "./card";
   export const ListCard = () => {
     return (
       <Flex flexDir="row">
-        {slideImages.map((img, i) => (<CustomCard image={img.src} title={img.title}/>))}
+        {slideImages.map((img, i) => (<CustomCard key={i} image={img.src} title={img.title}/>))}
       </Flex>
     );
   };

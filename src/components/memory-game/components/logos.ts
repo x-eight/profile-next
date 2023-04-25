@@ -1,3 +1,18 @@
+export enum GameState {
+  START = 0,
+  PAUSE = 1,
+  PROCESS = 2,
+  FINISHED = 3,
+}
+
+export interface levelParams {
+  id: number;
+  numCards: number;
+  name: string;
+  x: number;
+  y: number;
+}
+
 export interface logoType {
   id: number;
   name: string;

@@ -1,6 +1,6 @@
 import { SystemStyleObject, useColorModeValue } from '@chakra-ui/react';
 
-export const socialSX=():SystemStyleObject => {
+export const SocialSX=():SystemStyleObject => {
     return  {
         bg:useColorModeValue('blackAlpha.100', 'whiteAlpha.100'),
         rounded:'full',
@@ -17,7 +17,7 @@ export const socialSX=():SystemStyleObject => {
     }
 };
 
-export const containerSX=():SystemStyleObject => {
+export const ContainerSX=():SystemStyleObject => {
     return  {
         maxW:'6xl',
         py:4,

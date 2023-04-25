@@ -1,6 +1,6 @@
 import { VisuallyHidden,Link } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { socialSX } from './footer.sx';
+import { SocialSX } from './footer.sx';
 
   export const SocialButton = ({
     children,
@@ -12,7 +12,7 @@ import { socialSX } from './footer.sx';
     href: string;
 }) => {
     return (
-      <Link sx={{...socialSX()}} href={href} isExternal>
+      <Link sx={{...SocialSX()}} href={href} isExternal>
         <VisuallyHidden>{label}</VisuallyHidden>
         {children}
       </Link>

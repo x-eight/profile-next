@@ -1,35 +1,56 @@
-import { Box,Flex,Grid,GridItem } from '@chakra-ui/react';
-import React, { useEffect, useState,Dispatch, FC, SetStateAction } from 'react';
-
-import { Card } from './card';
-import { arrCardsRand } from './createArrCardsRand';
-import { ImageCard } from './image-card';
-import { getCards, logoType } from './logos';
+import { Flex, Grid } from "@chakra-ui/react";
+import React, { useEffect, useState, FC } from "react";
+import { ImageCard } from "./image-card";
+import { getCards, levelParams, logoType } from "./logos";
 
 type Props = {
-    level: number;
-    setStateGame: Dispatch<SetStateAction<number>>;
-    levelType:any
+  gameState: number;
+  currentLevel: levelParams;
 };
 
-export const GameScreen: FC<Props> = ({ level, setStateGame,levelType }) => {
-  let [cards, setTCards] = useState<logoType[]>([])
+export const GameScreen: FC<Props> = ({ gameState, currentLevel }) => {
+  let [cards, setCards] = useState<logoType[]>([]);
+
+  let [firstCardId, setFirstCardId] = useState<undefined | number>(undefined);
+  let [secondCardId, setSecondCardId] = useState<undefined | number>(undefined);
+  let [isReset, setIsReset] = useState<boolean>(false);
 
   useEffect(() => {
-    const ss = getCards(levelType[level].numCards/2)
-    setTCards(ss)
-    console.log("ss :",ss)
-  }, [level])
-  
+    if (firstCardId && secondCardId) {
+      if (firstCardId !== secondCardId) {
+        setIsReset(true);
+      } else {
+        setFirstCardId(undefined);
+        setSecondCardId(undefined);
+      }
+    }
+  }, [firstCardId, secondCardId]);
+
+  useEffect(() => {
+    const foundCards = getCards(currentLevel.numCards / 2);
+    setCards(foundCards);
+  }, [currentLevel]);
+
   return (
     <Flex justifyContent="center" flexWrap="wrap">
-      <Grid templateColumns={`repeat(${levelType[level].x}, 1fr)`}
-      templateRows={`repeat(${levelType[level].y}, 1fr)`}
-      gap={4}>
-        {cards.map(c=><ImageCard text={c.name} card={c}/>)}
-
+      <Grid
+        templateColumns={`repeat(${currentLevel.x}, 1fr)`}
+        templateRows={`repeat(${currentLevel.y}, 1fr)`}
+        gap={4}
+      >
+        {cards.map((c, i) => (
+          <ImageCard
+            card={c}
+            isReset={isReset}
+            setFirstCardId={setFirstCardId}
+            setSecondCardId={setSecondCardId}
+            key={i}
+            firstCardId={firstCardId}
+            secondCardId={secondCardId}
+            setIsReset={setIsReset}
+          />
+        ))}
       </Grid>
     </Flex>
-  )
-}
-
+  );
+};

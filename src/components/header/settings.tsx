@@ -20,18 +20,12 @@ export const Setting:FC = () =>  {
           variant={'link'}
           cursor={'pointer'}
           minW={0}>
-          <Avatar
-            size={'sm'}
-            src={"../../assets/avatar.jpg"}
-          />
+          <Avatar size={'sm'} />
         </MenuButton>
         <MenuList alignItems={'center'}>
           <br />
           <Center>
-            <Avatar
-              size={'2xl'}
-              src={"../../assets/avatar.jpg"}
-            />
+            <Avatar size={'2xl'}/>
           </Center>
           <br />
           <Center>
