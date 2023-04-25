@@ -9,16 +9,16 @@ COPY package*.json ./
 COPY package-lock.json ./
 
 # Instalación de las dependencias
+
+#RUN npm i -g pnpm
 #RUN pnpm install
-RUN npm i -g pnpm
-RUN pnpm install
-#RUN npm install
+RUN npm install
 
 # Copia del código fuente al contenedor
 COPY . .
 
 # Compilación del proyecto
-RUN pnpm run build
+RUN npm run build
 
 # Instalar cualquier dependencia necesaria
 RUN npm install -g serve
