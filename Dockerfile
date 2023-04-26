@@ -21,10 +21,11 @@ COPY . .
 RUN npm run build
 
 # Instalar cualquier dependencia necesaria
-RUN npm install -g serve
+# RUN npm install -g serve
 
 # Exponer el puerto 5000 para que pueda ser accesible desde fuera del contenedor
 EXPOSE 80
+EXPOSE 3000
 
 # Iniciar el servidor
 CMD ["npm", "start"]
