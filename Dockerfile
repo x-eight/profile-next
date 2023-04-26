@@ -27,4 +27,4 @@ RUN npm install -g serve
 EXPOSE 80
 
 # Iniciar el servidor
-CMD ["serve", "-s", "/app/build"]
+CMD ["npm", "start"]
